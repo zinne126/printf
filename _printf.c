@@ -9,7 +9,7 @@ int _printf(const char * const format, ...)
 	convert_match m[] = {
 		{"%s", printf_up}, {"%c", printf_top},
 		{"%%", printf_55},
-		{"%i", printf_int}, {"%d", printf_dec}, {"%r", printf_revv},
+		{"%i", printf_nss}, {"%d", printf_dec}, {"%r", printf_revv},
 		{"%R", printf_mis1}, {"%b", printf_pin}, {"%u", printf_hottie},
 		{"%o", printf_onx}, {"%x", printf_zen}, {"%X", printf_ZEN},
 		{"%S", printf_cring}, {"%p", printf_bin}
