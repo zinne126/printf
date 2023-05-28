@@ -1,7 +1,7 @@
 #include "main.h"
 
 /**
- * examine - print a formatted string after receiving main string
+ * parser - print a formatted string after receiving main string
  * and all necessary parameters
  * @format: string containing all the desired characters
  * @f_list: list of all the posible functions
@@ -9,16 +9,17 @@
  * Return: total count of the characters printed
  */
 
-int examine(const char *format, conver_t f_list[], va_list arg_list)
+int parser(const char *format, conver_t f_list[], va_list arg_list)
 {
 	int i, j, r_val, printed_chars;
 
 	printed_chars = 0;
 	for (i = 0; format[i] != '\0'; i++)/* Iterates through the main str*/
 	{
-		if (format[i] == '%') /Checks for format specifiers/
+
+		if (format[i] == '%') / Checks for format specifiers /
 		{
-			/Iterates through struct to find the right func/
+			/ Iterates through struct to find the right func /
 			for (j = 0; f_list[j].sym != NULL; j++)
 			{
 				if (format[i + 1] == f_list[j].sym[0])
@@ -41,11 +42,11 @@ int examine(const char *format, conver_t f_list[], va_list arg_list)
 				else
 					return (-1);
 			}
-			i = i + 1; /Updating i to skip format symbols/
+			i = i + 1; / Updating i to skip format symbols /
 		}
 		else
 		{
-			_code_char(format[i]); /call the write function/
+			_code_char(format[i]); / call the write function /
 			printed_chars++;
 		}
 	}
