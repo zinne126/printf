@@ -1,49 +1,46 @@
 #ifndef MAIN_H
 #define MAIN_H
 
-#include <stdio.h>
+#include <unistd.h>
 #include <stdlib.h>
 #include <stdarg.h>
-#include <limits.h>
-#include <unistd.h>
-
-
 
 /**
- * struct format - match the conversion specifiers for printf
- * @id: type char pointer of the specifier i.e (l, h) for (d, i, u, o, x, X)
- * @f: type pointer to function for the conversion specifier
- *
- */
-
-typedef struct format
+* struct convert - defines a structure for symbols and functions
+*
+* @sym: The operator
+* @f: The function associated
+*/
+struct convert
 {
-	char *id;
-	int (*f)();
-} convert_match;
+	char *sym;
+	int (*f)(va_list);
+};
+typedef struct convert conver_t;
 
-int printf_bin(va_list val);
-int printf_hex(unsigned long int num);
-int printf_FUN(unsigned int num);
-int printf_cring(va_list val);
-int printf_ZEN(va_list val);
-int printf_zen(va_list val);
-int printf_onx(va_list val);
-int printf_hottie(va_list args);
-int printf_pin(va_list val);
-int printf_revv(va_list args);
-int printf_mis1(va_list args);
-int printf_nss(va_list args);
-int printf_dec(va_list args);
-int _strlen(char *s);
-int *_strcpy(char *dest, char *src);
-int _strlenc(const char *s);
-int rev_string(char *s);
-int _strlenc(const char *s);
-int printf_55(void);
-int printf_top(va_list val);
-int printf_up(va_list val);
-int _putchar(char c);
+/*Main functions*/
+int examine(const char *format, conver_t f_list[], va_list arg_list);
 int _printf(const char *format, ...);
+int _code_char(char);
+int print_char(va_list);
+int print_string(va_list);
+int print_percent(va_list);
+int print_integer(va_list);
+int print_figures(va_list);
+int print_binary(va_list);
+int print_reversed(va_list arg);
+int rot13(va_list);
+int unsigned_integer(va_list);
+int print_octal(va_list list);
+int print_hex(va_list list);
+int print_heX(va_list list);
+
+/*Helper functions*/
+unsigned int base_len(unsigned int, int);
+char *rev_string(char *);
+void write_base(char *str);
+char *_memcpy(char *dest, char *src, unsigned int n);
+int print_unsgined_number(unsigned int);
+
 
 #endif
