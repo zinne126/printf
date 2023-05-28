@@ -1,78 +1,81 @@
 #include "main.h"
+#include <stdio.h>
 
 /**
- * print_char - prints character
- * @list: list of arguments passed
- * Return: number of characters printed
+ * rev_string - reverses a string
+ * @s: string to reverse
+ * Return: A pointer to a character
  */
 
-int print_char(va_list list)
+char *rev_string(char *s)
 {
-	_code_char(va_arg(list, int));
-	return (1);
+	int len;
+	int head;
+	char tmp;
+	char *dest;
+
+	for (len = 0; s[len] != '\0'; len++)
+	{}
+
+	dest = malloc(sizeof(char) * len + 1);
+	if (dest == NULL)
+		return (NULL);
+
+	_memcpy(dest, s, len);
+	for (head = 0; head < len; head++, len--)
+	{
+		tmp = dest[len - 1];
+		dest[len - 1] = dest[head];
+		dest[head] = tmp;
+	}
+	return (dest);
 }
 
 /**
- * print_string - prints string
- * @list: list of arguments passed
- * Return: return amount of characters printed
+ * write_base - sends characters to standard output
+ * @str: string to parse
  */
 
-int print_string(va_list list)
+void write_base(char *str)
 {
 	int i;
-	char *str;
 
-	str = va_arg(list, char *);
-	if (str == NULL)
-		str = "(null)";
 	for (i = 0; str[i] != '\0'; i++)
-		_write_char(str[i]);
+		_code_char(str[i]);
+}
+
+/**
+ * base_len - calculates length for an octal number
+ * @num: number for which the length is being calculated
+ * @base: base to be calculated
+ * Return: an integer representing the length of a number
+ */
+
+unsigned int base_len(unsigned int num, int base)
+{
+	unsigned int i;
+
+	for (i = 0; num > 0; i++)
+	{
+		num = num / base;
+	}
 	return (i);
 }
 
 /**
- * print_percent - prints the percent symbol
- * @list: list of arguments passed
- * Return: amount of characters printed
+ * _memcpy - copy memory area
+ * @dest: destination for copying
+ * @src: source to copy from
+ * @n: number of bytes to copy
+ * Return: a pointer to dest.
  */
 
-int print_percent(__attribute__((unused))va_list list)
+char *_memcpy(char *dest, char *src, unsigned int n)
 {
-	_code_char('%');
-	return (1);
-}
+	unsigned int i;
 
-/**
- * print_integer - prints integer
- * @list: list of arguments passed
- * Return: amount of characters printed
- */
-
-int print_integer(va_list list)
-{
-	int num_length;
-
-	num_length = print_figures(list);
-	return (num_length);
-}
-
-/**
- * unsigned_integer - prints unsigned integers
- * @list: List of argumets passed
- * Return: count of the numbers
- */
-
-int unsigned_integer(va_list list)
-{
-	unsigned int num;
-
-	num = va_arg(list, unsigned int);
-
-	if (num == 0)
-		return (print_unsgined_number(num));
-
-	if (num < 1)
-		return (-1);
-	return (print_unsgined_number(num));
+	for (i = 0; i < n; i++)
+		dest[i] = src[i];
+	dest[i] = '\0';
+	return (dest);
 }
